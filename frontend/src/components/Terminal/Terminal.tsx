@@ -75,10 +75,12 @@ export default function Terminal({ logMessages, isConnected }: TerminalProps) {
         setTypedText("");
 
         let charIndex = 0;
-        const speed = fullText.length > 60 ? 10 : 20; // Faster for long messages
+        const speed = fullText.length > 60 ? 3 : 8; // Ultra-fast for large chunks, snappy for others
         const interval = setInterval(() => {
-            charIndex++;
-            setTypedText(fullText.slice(0, charIndex));
+            charIndex += 2; // Type 2 chars at a time for even more speed
+            const currentText = fullText.slice(0, charIndex);
+            setTypedText(currentText);
+            
             if (charIndex >= fullText.length) {
                 clearInterval(interval);
                 // Move to rendered logs

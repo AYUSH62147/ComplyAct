@@ -88,7 +88,7 @@ class AuditOrchestrator:
             f'Thought: Located input #{field_id}. Confidence: {confidence:.2f}',
             "nova-act",
         )
-        await self._simulate_thinking(0.3)
+        await asyncio.sleep(0.1)
 
         # Focus the field
         await self._send_command("focus", selector=f"#{field_id}")
@@ -97,7 +97,7 @@ class AuditOrchestrator:
             f'Action: Focus → #{field_id}',
             "nova-act",
         )
-        await self._simulate_thinking(0.5)
+        await asyncio.sleep(0.2)
 
         # Type the value
         await self._send_log(
@@ -107,8 +107,8 @@ class AuditOrchestrator:
         )
         await self._send_command("type", selector=f"#{field_id}", value=value, delay=delay)
 
-        # Wait for typing animation to complete on frontend
-        typing_duration = len(value) * delay + 0.5
+        # Wait for typing animation to complete on frontend - slightly less than actual to keep terminal ahead
+        typing_duration = (len(value) * delay) * 0.8
         await asyncio.sleep(typing_duration)
 
         # Confidence assessment
@@ -147,7 +147,7 @@ class AuditOrchestrator:
             await self._simulate_thinking(1.0)
 
             await self._send_log("agent", "Invoking Amazon Nova Pro v1.0 for multimodal extraction...", "nova-pro")
-            await self._simulate_thinking(1.5)
+            await self._simulate_thinking(0.8)
 
             # Load mock data
             self.extracted_data = self._load_mock_data()
@@ -160,7 +160,7 @@ class AuditOrchestrator:
             )
             try: await add_trace(self.run_id, "nova_pro_extraction", {"fields_count": len(fields)}, None)
             except Exception: logger.warning("DB: Failed to add extraction trace")
-            await self._simulate_thinking(0.5)
+            await asyncio.sleep(0.3)
 
             # Check for risk flags
             risk_flags = self.extracted_data.get("risk_flags", [])
@@ -182,7 +182,7 @@ class AuditOrchestrator:
                 "Thought: Navigating to Vendor Audit Entry form at legacy-erp.internal:8443",
                 "nova-act",
             )
-            await self._simulate_thinking(0.8)
+            await asyncio.sleep(0.4)
 
             # Fill fields in order — halt at date field
             # Field 1: Vendor Name (high confidence)
@@ -215,21 +215,21 @@ class AuditOrchestrator:
             await self._simulate_thinking(0.5)
 
             await self._send_command("focus", selector="#date")
-            await self._simulate_thinking(0.3)
+            await asyncio.sleep(0.1)
 
             await self._send_log(
                 "error",
                 f'⚠ CONFIDENCE {date_field["confidence"]:.0%} — BELOW THRESHOLD {CONFIDENCE_THRESHOLD:.0%}',
                 "halt",
             )
-            await self._simulate_thinking(0.3)
+            await asyncio.sleep(0.1)
 
             await self._send_log(
                 "error",
                 f'Halt reason: {date_field.get("ambiguity_note", "Ambiguous handwritten date detected.")}',
                 "halt",
             )
-            await self._simulate_thinking(0.2)
+            await asyncio.sleep(0.1)
 
             await self._send_log(
                 "warn",

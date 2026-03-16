@@ -21,6 +21,7 @@ export default function SlackModal({
     originalValue,
     confidence,
     onApprove,
+    onDismiss,
 }: SlackModalProps) {
     const [overrideValue, setOverrideValue] = useState("");
     const [isApproving, setIsApproving] = useState(false);
@@ -44,6 +45,17 @@ export default function SlackModal({
 
             {/* Modal */}
             <div className="relative w-full max-w-lg mx-4 animate-in fade-in zoom-in-95 duration-200">
+                {/* Close Button (Cross) */}
+                <button
+                    onClick={onDismiss}
+                    className="absolute -top-3 -right-3 z-10 w-8 h-8 flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-zinc-400 hover:text-zinc-600 rounded-full border border-zinc-200 shadow-xl transition-all"
+                    aria-label="Close"
+                >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
                 <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
                     {/* Slack-style Header */}
                     <div className="bg-[#4A154B] px-6 py-4">

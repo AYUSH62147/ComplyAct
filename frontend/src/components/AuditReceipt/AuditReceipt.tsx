@@ -26,6 +26,17 @@ export default function AuditReceipt({
 
             {/* Receipt Card */}
             <div className="relative w-full max-w-md mx-4 animate-in fade-in zoom-in-95 duration-300">
+                {/* Close Button (Cross) */}
+                <button
+                    onClick={onReset}
+                    className="absolute -top-3 -right-3 z-10 w-8 h-8 flex items-center justify-center bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white rounded-full border border-zinc-700 shadow-xl transition-all"
+                    aria-label="Close"
+                >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
                 <div className="bg-zinc-900 rounded-xl shadow-2xl overflow-hidden border border-zinc-700">
                     {/* Success Header */}
                     <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-5 text-center">

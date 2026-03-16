@@ -314,6 +314,7 @@ export default function Home() {
         originalValue={haltData?.originalValue || "10/12/2023"}
         confidence={haltData?.confidence || 0.42}
         onApprove={handleApprove}
+        onDismiss={handleReset}
       />
 
       <AuditReceipt
