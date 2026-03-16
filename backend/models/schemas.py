@@ -50,6 +50,7 @@ class WSCommand(BaseModel):
     """WebSocket command sent to frontend for Ghost Cursor animation"""
 
     action: str  # "type", "click", "focus", "highlight", "log", "halt", "resume"
+    msg_id: Optional[str] = None
     selector: Optional[str] = None
     value: Optional[str] = None
     message: Optional[str] = None
@@ -60,6 +61,7 @@ class WSCommand(BaseModel):
 class TerminalLog(BaseModel):
     """Terminal log entry for the right-side panel"""
 
+    msg_id: Optional[str] = None
     timestamp: str
     level: str  # "info", "warn", "error", "success", "agent"
     message: str

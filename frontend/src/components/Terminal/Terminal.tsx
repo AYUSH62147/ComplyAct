@@ -128,40 +128,55 @@ export default function Terminal({ logMessages, isConnected }: TerminalProps) {
             </div>
 
             {/* Terminal Body */}
-            <div ref={scrollRef} className="flex-1 overflow-auto p-4 font-mono text-xs leading-relaxed">
-                {allLogs.map((log, i) => (
-                    <div key={`log-${i}`} className="flex gap-2 mb-1 hover:bg-zinc-900/50 px-1 rounded">
-                        <span className="text-zinc-600 shrink-0">{formatTimestamp(log.timestamp)}</span>
-                        <span className={`shrink-0 ${levelColors[log.level || "info"]}`}>
-                            {levelIcons[log.level || "info"]}
-                        </span>
-                        {log.step && <span className="text-zinc-500 shrink-0">[{log.step}]</span>}
-                        <span className={`${levelColors[log.level || "info"]} opacity-90`}>{log.message}</span>
-                    </div>
-                ))}
+            <div ref={scrollRef} className="flex-1 overflow-auto p-4 font-mono text-xs leading-relaxed relative group">
+                {/* Scanline Effect Overlay */}
+                <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] z-10 opacity-30 group-hover:opacity-40 transition-opacity" />
+                
+                <div className="relative z-0">
+                    {allLogs.map((log, i) => (
+                        <div key={`log-${i}`} className="flex gap-2 mb-1 hover:bg-zinc-900/40 px-1 rounded transition-colors group/line">
+                            <span className="text-zinc-600 shrink-0 tabular-nums">{formatTimestamp(log.timestamp)}</span>
+                            <span className={`shrink-0 ${levelColors[log.level || "info"]} drop-shadow-[0_0_8px_currentColor] opacity-90`}>
+                                {levelIcons[log.level || "info"]}
+                            </span>
+                            {log.step && (
+                                <span className="text-zinc-500 shrink-0 text-[10px] border border-zinc-800 px-1 rounded bg-zinc-900/50">
+                                    {log.step.toUpperCase()}
+                                </span>
+                            )}
+                            <span className={`${levelColors[log.level || "info"]} opacity-90 group-hover/line:opacity-100 transition-opacity`}>
+                                {log.message}
+                            </span>
+                        </div>
+                    ))}
 
-                {/* Typewriter line */}
-                {typingLine && (
-                    <div className="flex gap-2 mb-1 px-1">
-                        <span className="text-zinc-600 shrink-0">{formatTimestamp(new Date().toISOString())}</span>
-                        <span className={`shrink-0 ${levelColors[typingLine.level]}`}>
-                            {levelIcons[typingLine.level]}
-                        </span>
-                        {typingLine.step && <span className="text-zinc-500 shrink-0">[{typingLine.step}]</span>}
-                        <span className={`${levelColors[typingLine.level]} opacity-90`}>
-                            {typedText}
-                            <span className="inline-block w-1.5 h-3 bg-current animate-pulse ml-0.5" />
-                        </span>
-                    </div>
-                )}
+                    {/* Typewriter line */}
+                    {typingLine && (
+                        <div className="flex gap-2 mb-1 px-1">
+                            <span className="text-zinc-600 shrink-0 tabular-nums">{formatTimestamp(new Date().toISOString())}</span>
+                            <span className={`shrink-0 ${levelColors[typingLine.level]} drop-shadow-[0_0_8px_currentColor]`}>
+                                {levelIcons[typingLine.level]}
+                            </span>
+                            {typingLine.step && (
+                                <span className="text-zinc-500 shrink-0 text-[10px] border border-zinc-800 px-1 rounded bg-zinc-900/50">
+                                    {typingLine.step.toUpperCase()}
+                                </span>
+                            )}
+                            <span className={`${levelColors[typingLine.level]} drop-shadow-[0_0_5px_currentColor]`}>
+                                {typedText}
+                                <span className="inline-block w-1.5 h-3 bg-current animate-[pulse_0.6s_ease-in-out_infinite] ml-0.5 shadow-[0_0_10px_currentColor]" />
+                            </span>
+                        </div>
+                    )}
 
-                {/* Idle cursor */}
-                {!typingLine && (
-                    <div className="flex gap-2 mt-2 px-1">
-                        <span className="text-green-500">▸</span>
-                        <span className="inline-block w-2 h-3.5 bg-green-500 animate-pulse" />
-                    </div>
-                )}
+                    {/* Idle cursor */}
+                    {!typingLine && (
+                        <div className="flex gap-2 mt-2 px-1">
+                            <span className="text-green-500 animate-pulse">▸</span>
+                            <span className="inline-block w-2 h-3.5 bg-green-500 animate-[pulse_0.8s_ease-in-out_infinite] shadow-[0_0_12px_#22c55e]" />
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* Status Bar */}

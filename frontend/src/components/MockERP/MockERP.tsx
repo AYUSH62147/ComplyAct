@@ -44,20 +44,40 @@ export default function MockERP({ commandQueue }: MockERPProps) {
     const [isHalted, setIsHalted] = useState(false);
     const [haltMessage, setHaltMessage] = useState<string>("");
     const [isComplete, setIsComplete] = useState(false);
-    const [processedCount, setProcessedCount] = useState(0);
+    const processedCount = useRef(0);
+    const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+    const [isCursorVisible, setIsCursorVisible] = useState(false);
     const typingTimeoutRef = useRef<NodeJS.Timeout[]>([]);
+    const formRef = useRef<HTMLDivElement>(null);
+
+    // Track field positions for the Ghost Cursor
+    const updateCursorPosition = (selector: string) => {
+        const id = selector.replace("#", "");
+        const element = document.getElementById(id);
+        if (element && formRef.current) {
+            const rect = element.getBoundingClientRect();
+            const parentRect = formRef.current.getBoundingClientRect();
+            setCursorPos({
+                x: rect.left - parentRect.left + 10,
+                y: rect.top - parentRect.top + rect.height / 2
+            });
+            setIsCursorVisible(true);
+        }
+    };
 
     useEffect(() => {
-        if (commandQueue.length <= processedCount) return;
+        if (commandQueue.length <= processedCount.current) return;
 
-        const newCommands = commandQueue.slice(processedCount);
-        setProcessedCount(commandQueue.length);
+        const newCommands = commandQueue.slice(processedCount.current);
+        processedCount.current = commandQueue.length;
 
         newCommands.forEach((cmd) => {
             switch (cmd.action) {
                 case "focus":
                     if (cmd.selector) {
-                        setActiveField(cmd.selector.replace("#", ""));
+                        const fieldId = cmd.selector.replace("#", "");
+                        setActiveField(fieldId);
+                        updateCursorPosition(cmd.selector);
                     }
                     break;
 
@@ -102,7 +122,7 @@ export default function MockERP({ commandQueue }: MockERPProps) {
                     break;
             }
         });
-    }, [commandQueue, processedCount]);
+    }, [commandQueue]);
 
     useEffect(() => {
         return () => {
@@ -141,8 +161,53 @@ export default function MockERP({ commandQueue }: MockERPProps) {
                 </div>
             </div>
 
-            {/* ERP Content */}
-            <div className="flex-1 overflow-auto p-6">
+            {/* ERP Content Area */}
+            <div className="flex-1 overflow-hidden flex bg-zinc-50/50">
+                {/* Visual Document Sidebar (The "Strength" item) */}
+                <div className="w-56 border-r border-zinc-200 bg-zinc-100/50 p-4 flex flex-col gap-3 overflow-y-auto hidden lg:flex">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">Document Source</span>
+                        <div className="flex gap-1">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-[8px] font-bold text-green-600 uppercase">Live Preview</span>
+                        </div>
+                    </div>
+                    <div className="aspect-[1/1.4] w-full bg-white border border-zinc-300 rounded shadow-md relative overflow-hidden group">
+                        {/* Real Document Preview - Zoomed to look like it's being "looked at" */}
+                        <iframe 
+                            src={`/source_document.pdf?v=${Date.now()}#toolbar=0&navpanes=0&scrollbar=0`} 
+                            className="w-full h-[150%] border-none pointer-events-none transform scale-110 origin-top opacity-90"
+                            title="Source Document"
+                        />
+                        {/* Scanning beam effect */}
+                        {processedCount.current > 0 && !isComplete && (
+                             <div className="absolute left-0 w-full h-0.5 bg-blue-400/50 top-0 animate-[scan_2s_ease-in-out_infinite] shadow-[0_0_10px_#60a5fa] z-10" />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20 pointer-events-none" />
+                    </div>
+                </div>
+
+                <div ref={formRef} className="flex-1 overflow-auto p-6 relative bg-white">
+                {/* Visual Ghost Cursor */}
+                {isCursorVisible && (
+                    <div
+                        className="absolute z-50 pointer-events-none transition-all duration-500 ease-in-out"
+                        style={{ left: cursorPos.x, top: cursorPos.y }}
+                    >
+                        <div className="relative">
+                            {/* Cursor Sparkle/Glow */}
+                            <div className="absolute inset-0 w-8 h-8 -translate-x-1/2 -translate-y-1/2 bg-blue-400/20 blur-xl rounded-full" />
+                            {/* Main Cursor Icon */}
+                            <svg className="w-5 h-5 text-blue-600 drop-shadow-md transform -rotate-12" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7 2l12 11.2-5.8.8 3.5 6-1.7 1-3.5-6-4.5 5.5z" />
+                            </svg>
+                            {/* Label */}
+                            <div className="absolute left-6 top-0 px-1.5 py-0.5 bg-blue-600 text-[8px] text-white font-bold rounded shadow-sm whitespace-nowrap animate-in fade-in zoom-in duration-300">
+                                NOVA ACT AGENT
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className="max-w-lg mx-auto">
                     <div className="mb-5">
                         <h2 className="text-lg font-bold text-zinc-800">Vendor Audit Entry</h2>
@@ -196,12 +261,12 @@ export default function MockERP({ commandQueue }: MockERPProps) {
                                             value={formData[field.id as keyof FormData]}
                                             readOnly
                                             placeholder={field.placeholder}
-                                            className={`w-full px-3 py-2 text-sm border rounded-md font-mono transition-all duration-200 outline-none ${isActive
+                                            className={`w-full px-3 py-2 text-sm border rounded-md font-mono transition-all duration-200 outline-none text-zinc-900 ${isActive
                                                     ? "border-blue-500 ring-2 ring-blue-200 bg-blue-50 shadow-lg shadow-blue-100"
                                                     : isHaltedField
                                                         ? "border-red-400 ring-2 ring-red-200 bg-red-50"
                                                         : isFilled
-                                                            ? "border-green-300 bg-green-50/50"
+                                                            ? "border-green-300 bg-green-50/50 font-bold"
                                                             : "border-zinc-200 bg-white"
                                                 }`}
                                         />
@@ -243,5 +308,6 @@ export default function MockERP({ commandQueue }: MockERPProps) {
                 </div>
             </div>
         </div>
-    );
+    </div>
+);
 }

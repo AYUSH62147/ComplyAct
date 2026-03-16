@@ -76,7 +76,7 @@ export default function Home() {
         });
       }
     }
-  }, [commandQueue.length, auditData]);
+  }, [commandQueue.length, auditData?.extracted_data]);
 
   const handleStartAudit = useCallback(async () => {
     if (isStarting || auditState === "processing") return;
@@ -330,18 +330,28 @@ export default function Home() {
 function ConfidenceGauge({ scores }: { scores: { vendor_name: number; date: number; amount: number } }) {
   const avg = ((scores.vendor_name + scores.date + scores.amount) / 3 * 100).toFixed(0);
   const minScore = Math.min(scores.vendor_name, scores.date, scores.amount);
+  const isLow = minScore < 0.8;
 
   return (
-    <div className="flex items-center gap-2 px-2.5 py-1 bg-zinc-800 rounded-lg">
-      <span className="text-[10px] text-zinc-500 font-mono">CONF</span>
-      <span className={`text-xs font-mono font-bold ${minScore < 0.8 ? "text-amber-400" : "text-green-400"}`}>
-        {avg}%
-      </span>
-      <div className="w-12 h-1.5 bg-zinc-700 rounded-full overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all duration-1000 ${minScore < 0.8 ? "bg-amber-400" : "bg-green-400"}`}
-          style={{ width: `${avg}%` }}
-        />
+    <div className="flex items-center gap-3 px-3 py-1.5 bg-zinc-800/50 border border-zinc-700/50 rounded-xl backdrop-blur-sm">
+      <div className="flex flex-col">
+        <span className="text-[8px] text-zinc-500 font-bold tracking-widest uppercase">Nova Confidence</span>
+        <div className="flex items-center gap-2">
+          <span className={`text-lg font-mono font-black italic tracking-tighter ${isLow ? "text-amber-400 drop-shadow-[0_0_8px_#fbbf24]" : "text-green-400 drop-shadow-[0_0_8px_#4ade80]"}`}>
+            {avg}%
+          </span>
+          <div className="w-20 h-2 bg-zinc-900 rounded-full p-0.5 border border-zinc-800 overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_currentColor] ${isLow ? "bg-gradient-to-r from-amber-500 to-amber-300" : "bg-gradient-to-r from-green-600 to-emerald-400"}`}
+              style={{ width: `${avg}%` }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-0.5">
+         <div className={`w-1.5 h-1.5 rounded-full ${scores.vendor_name < 0.8 ? "bg-amber-500" : "bg-green-500"}`} />
+         <div className={`w-1.5 h-1.5 rounded-full ${scores.date < 0.8 ? "bg-amber-500 pulse" : "bg-green-500"}`} />
+         <div className={`w-1.5 h-1.5 rounded-full ${scores.amount < 0.8 ? "bg-amber-500" : "bg-green-500"}`} />
       </div>
     </div>
   );

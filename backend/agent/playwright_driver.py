@@ -43,6 +43,7 @@ class AuditOrchestrator:
         self.halt_event = asyncio.Event()
         self.extracted_data: dict = {}
         self.override_value: Optional[str] = None
+        self.msg_counter = 0
 
     def _load_mock_data(self) -> dict:
         """Load mock Nova Pro response"""
@@ -52,7 +53,9 @@ class AuditOrchestrator:
 
     async def _send_log(self, level: str, message: str, step: str = ""):
         """Send a terminal log message via WebSocket"""
+        self.msg_counter += 1
         log = TerminalLog(
+            msg_id=f"{self.run_id}_{self.msg_counter}",
             timestamp=datetime.now(timezone.utc).isoformat(),
             level=level,
             message=message,
@@ -62,7 +65,12 @@ class AuditOrchestrator:
 
     async def _send_command(self, action: str, **kwargs):
         """Send a Ghost Cursor command via WebSocket"""
-        command = WSCommand(action=action, **kwargs)
+        self.msg_counter += 1
+        command = WSCommand(
+            msg_id=f"{self.run_id}_{self.msg_counter}",
+            action=action, 
+            **kwargs
+        )
         await self.ws_manager.broadcast(command.model_dump())
 
     async def _simulate_thinking(self, seconds: float = 1.0):
