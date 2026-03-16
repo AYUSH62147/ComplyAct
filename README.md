@@ -1,72 +1,91 @@
 # ComplyAct: Bridging the Hallucination Gap in Enterprise APA 🛡️🤖
 
+![Visionary Header](./DOCS/unnamed%20(17)%20(1).png)
+
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![AWS](https://img.shields.io/badge/AI-Amazon%20Nova-FF9900?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/bedrock/nova/)
 [![Licence](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)](https://github.com/)
 
-> **ComplyAct** is a humble attempt at solving the "Invisible Barrier" of enterprise AI adoption: the lack of auditable governance in agentic systems. By combining **Amazon Nova's** multimodal reasoning with a deterministic **Human-in-the-Loop (HITL)** engine, we've built a translation layer that safely connects unstructured real-world data to rigid legacy ERP systems.
+## 📽️ Experience the 90-Second Demo
+[![Watch the Video](https://img.youtube.com/vi/xf2LqZiGfic/0.jpg)](https://www.youtube.com/watch?v=xf2LqZiGfic)
+*Click the image above to watch the official ComplyAct demo video.*
 
 ---
 
-## 🏔️ The Core Problem
-Enterprise automation is currently stuck between two worlds:
-1. **Traditional RPA**: Rigid, breaks easily, and cannot understand human nuances (like handwritten dates).
-2. **Modern AI Agents**: Powerful but unpredictable, prone to hallucinations, and often operating as a "black box."
+## 🏔️ The Core Vision
+Enterprise automation is currently stuck in a dangerous rift. Traditional RPA is too rigid, while modern AI agents are often "black boxes" that hallucinate at scale. **ComplyAct** is the auditable bridge. We've built a translation layer that safely connects unstructured real-world data to rigid legacy ERP systems, governed by a deterministic **Graceful Halt** engine.
 
-**ComplyAct** provides a third way: **Governed Agentic Automation.**
+## 🗺️ System Architecture & Workflow Map
+![System Map](./DOCS/unnamed%20(21)%20(1).png)
 
-## 🌟 Key Innovations
+### 🌟 Key Innovations
 
-### ⚡ Hyper-Sync Orchestration
-We developed a zero-latency WebSocket layer that synchronizes AI "thoughts" with UI "actions" at 2x speed. This ensures the agent never operates in the dark, and every movement is narrated in real-time to the auditor.
-
-### 👻 Nova Act Simulation (Ghost Cursor)
-Leveraging the reasoning patterns of **Amazon Nova Act**, our system uses coordinate-based navigation to drive legacy web interfaces. It doesn't just "click buttons"; it understands the spatial intent of the workflow.
-
-### 🚥 Graceful Halt (Governance)
-When the agent encounters low-confidence data (e.g., a messy handwritten field), it doesn't guess. It **halts.** It then surfaces a human-readable "Decision Modal" via Slack, ensuring that high-stakes transactions are always verified by a human expert.
-
-### 📜 Cryptographic Accountability
-Every successful process concludes with the generation of a SHA-256 hash, intended for immutable ledgers like **Amazon QLDB**. This transforms a "software action" into a "legal record."
+- **Multimodal Document Intelligence**: Powered by **Amazon Nova Pro**, ComplyAct extracts structured data from complex handwritten invoices and legal documents with precise confidence scoring.
+- **Ghost Cursor (Nova Act Simulation)**: A visual SVG agent that dynamically navigates legacy ERP systems, simulating the **Amazon Nova Act** reasoning model using coordinate-based intent.
+- **Hyper-Sync Engine**: A zero-latency synchronization layer that couples agent reasoning with UI actions at 2x speed for a responsive, human-in-the-loop experience.
+- **Auditable Ledger (QLDB)**: Every software action is transformed into a permanent legal record, generating a SHA-256 cryptographic receipt verified by **Amazon QLDB**.
 
 ---
 
-## 🛠️ Architecture
-- **Multimodal Intelligence**: Amazon Nova Pro for extraction.
-- **Action Simulation**: Amazon Nova Act patterns for navigation.
-- **Backend**: FastAPI (Python) for heavy-duty orchestration.
-- **Frontend**: Next.js 14 with a CRT-inspired "Transparency Terminal."
-- **Automation**: Playwright-driven deterministic executor.
+## 🚥 The Governance-First Workflow
+![Process Flow](./DOCS/unnamed%20(18)%20(1).png)
+
+1. **Smart Ingest**: Complex documents are ingested via Nova Pro.
+2. **AI Automation**: The Ghost Cursor begins navigating the legacy ERP.
+3. **Human Oversight**: The engine halts automatically if confidence drops below 80%.
+4. **Final Receipt**: A tamper-proof cryptographic receipt is generated for the audit trail.
 
 ---
 
-## 🚀 Experience the Demo
+## 🏗️ Technical Deep Dive
 
-We invite you to experience the future of auditable automation in one click.
+### Interaction Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant AWS_Nova
+    participant QLDB
 
-### Setup
-1. Clone the repository.
-2. Ensure you have Node.js 20+ and Python 3.11+ installed.
+    User->>Frontend: Upload Invoice
+    Frontend->>Backend: Start Audit (WebSocket)
+    Backend->>AWS_Nova: Multimodal Extraction
+    AWS_Nova-->>Backend: Data + Confidence
+    loop Automation
+        Backend->>Frontend: Move Ghost Cursor
+        Backend->>Frontend: Reasoning Log
+        alt Confidence < 80%
+            Backend->>Frontend: Graceful Halt Trigger
+            Frontend->>User: Slack Approval Modal
+            User->>Frontend: Human Decision
+            Frontend->>Backend: Resume with Corrected Value
+        end
+    end
+    Backend->>QLDB: Generate Cryptographic Hash
+    QLDB-->>Frontend: Audit Receipt
+```
 
-### Launch
-Run our automated orchestration script:
+---
+
+## 🚀 One-Click Launch
+We have designed ComplyAct for instantaneous local execution. Ensure you have **Node.js 20+** and **Python 3.11+** installed.
+
+### Run the Orchestrator
 ```powershell
 .\run_demo.bat
 ```
-*Wait for the terminals to initialize and visit [http://localhost:3000](http://localhost:3000).*
+*This script automatically manages port conflicts for both the FastAPI backend and Next.js frontend.*
+
+Visit [**http://localhost:3000**](http://localhost:3000) to begin the audit.
 
 ---
 
-## 🔭 Future Roadmap
-- [ ] **Voice-Native Governance**: Allow auditors to approve halts via Amazon Lex.
-- [ ] **Multi-Agent Swarms**: Deploying specialized agents for different ERP modules (Finance, HR, Logistics).
-- [ ] **Native QLDB Integration**: Moving from SHA-256 mocks to a full AWS Ledger Database.
+## ❤️ Vision & Acknowledgments
+ComplyAct was built with a deep respect for the challenges of highly regulated industries. By prioritizing governance over blind speed, we believe we can unlock the true potential of Agentic Process Automation.
 
----
+Special thanks to the **AWS Bedrock** team for the Amazon Nova stack, providing the high-speed reasoning and interaction models that power this platform.
 
-## ❤️ Acknowledgments
-Built with curiosity and respect for the challenges of enterprise automation. Special thanks to the **AWS Bedrock** team for the powerful Nova models that made this orchestration possible.
-
-*"Software is only as strong as the trust we place in it."*
+**"Auditable. Accountable. Agentic Agentic."**
