@@ -10,7 +10,7 @@ interface SlackModalProps {
     originalValue: string;
     confidence: number;
     onApprove: (overrideValue?: string) => void;
-    onDismiss?: () => void;
+    onDismiss: () => void;
 }
 
 export default function SlackModal({

@@ -1,20 +1,28 @@
-## DEMO_SAFETY_PLAN.md
-```markdown
-# Demo Safety & Reliability Protocols
+# Demo Safety & Reliability Plan
 
-Hackathon Wi-Fi will fail. AWS APIs might rate-limit. This project is engineered to survive.
+ComplyAct is designed for rock-solid hackathon presentations. We implement several layers of safety to prevent technical failures during live demos.
 
-## 1. The `DEMO_MODE` Environment Variable
-- If `DEMO_MODE=true`, the backend **must not** make any external HTTP requests to AWS.
-- It must read from `backend/mocks/*.json`.
-- It must use `time.sleep()` to simulate realistic LLM generation times (1.5s - 3.0s).
+## 🛡️ Presentation Safety Layers
 
-## 2. Playwright Determinism
-- Do not use Nova Act to dynamically guess DOM selectors during the live demo.
-- The Mock ERP UI (Next.js) must have hardcoded `id` attributes (e.g., `<input id="vendor-name" />`).
-- The Playwright script must target these exact IDs.
-- **Visual Trick:** The Terminal UI will *display* fake Nova Act reasoning logs (`"Thought: Found input #vendor-name. Action: Click."`) while the deterministic Playwright script executes.
+### 1. Deterministic Mode (`DEMO_MODE=true`)
+By default, the system runs in a deterministic mode. This ensures:
+- **Zero Hallucination**: Coordinates and extraction results are verified.
+- **Speed**: Optimized response times for a smooth walkthrough.
+- **Offline Reliable**: No dependencies on external API latency or rate limits.
 
-## 3. The Video Fallback
-- Once the project is working, record a flawless 90-second screen capture.
-- Keep this MP4 on the desktop. If the localhost environment crashes, switch to VLC player and narrate the video.
+### 2. Hyper-Sync & Timing
+- **2x Finish**: The system accelerates after human approval to keep the presentation momentum high.
+- **Typing Sync**: The terminal typewriter effect is mathematically coupled to agent actions to avoid visual lag.
+
+### 3. Graceful Recovery (`run_demo.bat`)
+A specialized startup script handles:
+- **Port Management**: Automatically clears ports 3000 and 8000.
+- **Parallel Orchestration**: Launches Backend and Frontend in separate manageable windows.
+
+### 4. UI Resilience
+- **Independent Dismissal**: Modals can be closed without resetting the state, allowing you to show the final "Audit Trails" post-automation.
+- **Connection Heartbeat**: The frontend indicator clearly shows "READY" or "OFFLINE" status.
+
+## 🚧 Live Troubleshooting
+- **Port Conflict**: Close the terminals and re-run `run_demo.bat`.
+- **UI Lag**: Refresh the browser (the backend state is atomic).

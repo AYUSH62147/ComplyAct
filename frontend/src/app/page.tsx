@@ -43,6 +43,8 @@ export default function Home() {
   const [humanOverrideApplied, setHumanOverrideApplied] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
   const [fieldsCompleted, setFieldsCompleted] = useState(0);
+  const [showSlack, setShowSlack] = useState(false);
+  const [showReceipt, setShowReceipt] = useState(false);
   const processedCommandCount = useRef(0);
 
   // Process commands from WebSocket
@@ -55,6 +57,7 @@ export default function Home() {
     for (const cmd of newCommands) {
       if (cmd.action === "halt") {
         setAuditState("halted");
+        setShowSlack(true);
         setHaltData({
           fieldName: "Date",
           originalValue: auditData?.extracted_data?.date || "10/12/2023",
@@ -63,8 +66,10 @@ export default function Home() {
         });
       } else if (cmd.action === "resume") {
         setAuditState("completing");
+        setShowSlack(false);
       } else if (cmd.action === "complete") {
         setAuditState("completed");
+        setShowReceipt(true);
         setFieldsCompleted(6);
         const hashMatch = cmd.message?.match(/Ledger ID: (.+)/);
         if (hashMatch) setCompletionHash(hashMatch[1]);
@@ -307,22 +312,23 @@ export default function Home() {
 
       {/* ─── Modal Overlays ──────────────────────────────── */}
       <SlackModal
-        isOpen={auditState === "halted"}
+        isOpen={showSlack}
         runId={auditData?.run_id || ""}
         haltReason={haltData?.message || "Ambiguous handwritten date detected."}
         fieldName={haltData?.fieldName || "Date"}
         originalValue={haltData?.originalValue || "10/12/2023"}
         confidence={haltData?.confidence || 0.42}
         onApprove={handleApprove}
-        onDismiss={handleReset}
+        onDismiss={() => setShowSlack(false)}
       />
 
       <AuditReceipt
-        isOpen={auditState === "completed"}
+        isOpen={showReceipt}
         runId={auditData?.run_id || ""}
         cryptoHash={completionHash}
         humanOverride={humanOverrideApplied}
         onReset={handleReset}
+        onDismiss={() => setShowReceipt(false)}
       />
     </main>
   );

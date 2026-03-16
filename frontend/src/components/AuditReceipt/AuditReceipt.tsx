@@ -8,6 +8,7 @@ interface AuditReceiptProps {
     cryptoHash: string;
     humanOverride: boolean;
     onReset: () => void;
+    onDismiss: () => void;
 }
 
 export default function AuditReceipt({
@@ -16,6 +17,7 @@ export default function AuditReceipt({
     cryptoHash,
     humanOverride,
     onReset,
+    onDismiss,
 }: AuditReceiptProps) {
     if (!isOpen) return null;
 
@@ -28,7 +30,7 @@ export default function AuditReceipt({
             <div className="relative w-full max-w-md mx-4 animate-in fade-in zoom-in-95 duration-300">
                 {/* Close Button (Cross) */}
                 <button
-                    onClick={onReset}
+                    onClick={onDismiss}
                     className="absolute -top-3 -right-3 z-10 w-8 h-8 flex items-center justify-center bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white rounded-full border border-zinc-700 shadow-xl transition-all"
                     aria-label="Close"
                 >
