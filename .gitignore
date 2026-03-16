@@ -45,3 +45,13 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Internal Project Builder Files (Secure)
+PRD.md
+handwriting_20260316_164728_via_10015_io.pdf
+EXECUTION_PLAN.md
+DEMO_SAFETY_PLAN.md
+DATABASE_SCHEMA.md
+ARCHITECTURE.md
+API_SPEC.md
+.clauderules
