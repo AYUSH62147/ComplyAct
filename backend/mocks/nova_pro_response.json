@@ -1,0 +1,83 @@
+{
+    "model": "amazon.nova-pro-v1:0",
+    "request_id": "mock-req-001",
+    "processing_time_ms": 1847,
+    "document_type": "vendor_audit_report",
+    "extracted_fields": {
+        "vendor_name": {
+            "value": "Acme Corp",
+            "confidence": 0.98,
+            "source": "printed_text",
+            "bounding_box": {
+                "x": 120,
+                "y": 45,
+                "width": 200,
+                "height": 30
+            }
+        },
+        "date": {
+            "value": "10/12/2023",
+            "confidence": 0.42,
+            "source": "handwritten",
+            "bounding_box": {
+                "x": 340,
+                "y": 112,
+                "width": 150,
+                "height": 28
+            },
+            "ambiguity_note": "Handwritten date with unclear month/day ordering. Could be Oct 12 or Dec 10."
+        },
+        "amount": {
+            "value": 4500.00,
+            "confidence": 0.95,
+            "source": "printed_text",
+            "bounding_box": {
+                "x": 450,
+                "y": 200,
+                "width": 120,
+                "height": 25
+            }
+        },
+        "invoice_number": {
+            "value": "INV-2023-4891",
+            "confidence": 0.99,
+            "source": "printed_text",
+            "bounding_box": {
+                "x": 50,
+                "y": 15,
+                "width": 180,
+                "height": 22
+            }
+        },
+        "payment_terms": {
+            "value": "Net 30",
+            "confidence": 0.91,
+            "source": "printed_text",
+            "bounding_box": {
+                "x": 400,
+                "y": 280,
+                "width": 100,
+                "height": 20
+            }
+        },
+        "vendor_address": {
+            "value": "742 Evergreen Terrace, Springfield, IL 62704",
+            "confidence": 0.88,
+            "source": "printed_text",
+            "bounding_box": {
+                "x": 120,
+                "y": 70,
+                "width": 300,
+                "height": 40
+            }
+        }
+    },
+    "risk_flags": [
+        {
+            "field": "date",
+            "risk_level": "high",
+            "reason": "Handwritten date with OCR confidence below threshold (0.42 < 0.80). Potential month/day ambiguity."
+        }
+    ],
+    "summary": "Vendor audit document for Acme Corp. 5 of 6 fields extracted with high confidence. 1 field (date) flagged for human review due to handwritten input ambiguity."
+}
