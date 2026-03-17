@@ -1,6 +1,6 @@
 # ComplyAct: Gemini-Powered Agentic Governance for Enterprise APA 🛡️✦
 
-![Gemini UI Navigator Header](./DOCS/unnamed%20(17)%20(1).png)
+![Gemini UI Navigator Header](./DOCS/Screenshot%202026-03-17%20061246.png)
 
 [![Gemini](https://img.shields.io/badge/AI-Google%20Gemini%201.5-4285F4?style=for-the-badge&logo=google-gemini&logoColor=white)](https://ai.google.dev/)
 [![Google Cloud](https://img.shields.io/badge/Cloud-Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
@@ -11,7 +11,7 @@
 ---
 
 ### 📽️ Experience the Gemini Multimodal Demo
-[![Watch the Gemini Demo](https://img.youtube.com/vi/xf2LqZiGfic/0.jpg)](https://www.youtube.com/watch?v=xf2LqZiGfic)
+[![Watch the Gemini Demo](https://img.youtube.com/vi/xf2LqZiGfic/0.jpg)](https://vimeo.com/1174199995?share=copy&fl=sv&fe=ci)
 *ComplyAct uses Gemini 1.5 Pro to navigate legacy interfaces with real-time multimodal reasoning.*
 
 ---
@@ -22,7 +22,7 @@ Enterprise automation is currently stuck in a dangerous rift. Traditional RPA is
 Submitting to the **Gemini Live Agent Challenge (UI Navigator Track)**, ComplyAct demonstrates how **Gemini 1.5 Pro** can interpret unstructured real-world documents and safely navigate legacy ERP systems, governed by a deterministic **Graceful Halt** engine and backed by an immutable record on **Google Cloud Firestore**.
 
 ## 🗺️ System Architecture & Workflow Map
-![Gemini Workflow](./DOCS/unnamed%20(21)%20(1).png)
+![Gemini Workflow](./DOCS/unnamed%20(19).png)
 
 ### 🌟 Key Innovations for the Gemini Challenge
 

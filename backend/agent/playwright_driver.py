@@ -264,6 +264,15 @@ class AuditOrchestrator:
                 delay=0.03,
             )
 
+            # Field 6: Vendor Address
+            await self._type_field(
+                "vendor-address",
+                fields["vendor_address"]["value"],
+                "Vendor Address",
+                fields["vendor_address"]["confidence"],
+                delay=0.02, # Even faster for the finale
+            )
+
             # ─── Phase: Finalization & Audit Ledger ──────────
             await self._send_log("info", "Generating cryptographic audit record...", "audit")
             await self._simulate_thinking(1.0)
