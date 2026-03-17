@@ -220,9 +220,9 @@ export default function Home() {
             }
           </div>
 
-          {/* AWS Badge */}
-          <div className="flex items-center gap-1 px-2 py-1 bg-zinc-800 rounded text-[10px] text-amber-400 font-mono">
-            <span>☁</span> AWS Nova
+          {/* Gemini Badge */}
+          <div className="flex items-center gap-1 px-2 py-1 bg-zinc-800 rounded text-[10px] text-blue-400 font-mono">
+            <span>✦</span> Gemini Multimodal
           </div>
         </div>
       </header>
@@ -295,7 +295,7 @@ export default function Home() {
             {auditState === "completed" && (
               <div className="flex items-center gap-3 px-2">
                 <span className="text-green-400 text-lg">✓</span>
-                <span className="text-sm font-mono font-bold text-green-400 flex-1">AUDIT COMPLETE — QLDB Verified</span>
+                <span className="text-sm font-mono font-bold text-green-400 flex-1">AUDIT COMPLETE — Google Cloud Verified</span>
               </div>
             )}
 
@@ -342,7 +342,7 @@ function ConfidenceGauge({ scores }: { scores: { vendor_name: number; date: numb
   return (
     <div className="flex items-center gap-3 px-3 py-1.5 bg-zinc-800/50 border border-zinc-700/50 rounded-xl backdrop-blur-sm">
       <div className="flex flex-col">
-        <span className="text-[8px] text-zinc-500 font-bold tracking-widest uppercase">Nova Confidence</span>
+        <span className="text-[8px] text-zinc-500 font-bold tracking-widest uppercase">Gemini Confidence</span>
         <div className="flex items-center gap-2">
           <span className={`text-lg font-mono font-black italic tracking-tighter ${isLow ? "text-amber-400 drop-shadow-[0_0_8px_#fbbf24]" : "text-green-400 drop-shadow-[0_0_8px_#4ade80]"}`}>
             {avg}%

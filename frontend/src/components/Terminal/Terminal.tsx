@@ -41,7 +41,7 @@ const WELCOME_LOGS: LogMessage[] = [
     {
         timestamp: new Date().toISOString(),
         level: "info",
-        message: "Powered by AWS Nova Pro • Nova Act • Nova Sonic",
+        message: "Powered by Google Gemini 1.5 Pro • UI Navigator",
         step: "boot",
     },
     {
@@ -185,7 +185,7 @@ export default function Terminal({ logMessages, isConnected }: TerminalProps) {
             <div className="flex items-center justify-between px-4 py-1.5 bg-zinc-900 border-t border-zinc-800 text-[10px] font-mono text-zinc-500">
                 <span>DEMO_MODE: ON</span>
                 <span>LOGS: {allLogs.length + (typingLine ? 1 : 0)}</span>
-                <span>AWS NOVA PRO | NOVA ACT</span>
+                <span>GOOGLE GEMINI | UI NAVIGATOR</span>
             </div>
         </div>
     );

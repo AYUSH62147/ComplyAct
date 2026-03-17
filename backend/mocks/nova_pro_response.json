@@ -1,5 +1,5 @@
 {
-    "model": "amazon.nova-pro-v1:0",
+    "model": "gemini-1.5-pro",
     "request_id": "mock-req-001",
     "processing_time_ms": 1847,
     "document_type": "vendor_audit_report",

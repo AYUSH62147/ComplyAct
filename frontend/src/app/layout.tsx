@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ComplyAct — Auditable Agentic Process Automation",
-  description: "Enterprise-grade APA powered by AWS Nova",
+  description: "Enterprise-grade APA powered by Google Gemini",
 };
 
 export default function RootLayout({

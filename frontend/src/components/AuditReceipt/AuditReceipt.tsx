@@ -53,12 +53,12 @@ export default function AuditReceipt({
 
                     {/* Receipt Details */}
                     <div className="px-6 py-5 space-y-4">
-                        {/* QLDB Badge */}
-                        <div className="flex items-center justify-center gap-2 py-2 px-4 bg-amber-950/50 border border-amber-700/50 rounded-lg">
-                            <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        {/* Google Cloud Badge */}
+                        <div className="flex items-center justify-center gap-2 py-2 px-4 bg-blue-950/50 border border-blue-700/50 rounded-lg">
+                            <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
-                            <span className="text-xs font-mono text-amber-400 font-bold">VERIFIED BY AMAZON QLDB</span>
+                            <span className="text-xs font-mono text-blue-400 font-bold uppercase tracking-tight">Verified by Google Cloud</span>
                         </div>
 
                         {/* Details Grid */}
@@ -78,7 +78,7 @@ export default function AuditReceipt({
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-zinc-500">Human Override</span>
                                 <span className={`text-xs font-mono px-2 py-0.5 rounded ${humanOverride
-                                        ? "bg-amber-950 text-amber-400 border border-amber-800"
+                                        ? "bg-blue-950 text-blue-400 border border-blue-800"
                                         : "bg-zinc-800 text-zinc-400 border border-zinc-700"
                                     }`}>
                                     {humanOverride ? "APPLIED" : "NONE"}

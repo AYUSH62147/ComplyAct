@@ -1,45 +1,49 @@
-# ComplyAct: Bridging the Hallucination Gap in Enterprise APA 🛡️🤖
+# ComplyAct: Gemini-Powered Agentic Governance for Enterprise APA 🛡️✦
 
-![Visionary Header](./DOCS/unnamed%20(17)%20(1).png)
+![Gemini UI Navigator Header](./DOCS/unnamed%20(17)%20(1).png)
 
+[![Gemini](https://img.shields.io/badge/AI-Google%20Gemini%201.5-4285F4?style=for-the-badge&logo=google-gemini&logoColor=white)](https://ai.google.dev/)
+[![Google Cloud](https://img.shields.io/badge/Cloud-Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![AWS](https://img.shields.io/badge/AI-Amazon%20Nova-FF9900?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/bedrock/nova/)
-[![Licence](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)](https://github.com/)
+[![Track](https://img.shields.io/badge/Track-UI%20Navigator-FFD700?style=for-the-badge)](https://geminiliveagentchallenge.devpost.com/)
 
-## 📽️ Experience the 90-Second Demo
-[![Watch the Video](https://img.youtube.com/vi/xf2LqZiGfic/0.jpg)](https://www.youtube.com/watch?v=xf2LqZiGfic)
-*Click the image above to watch the official ComplyAct demo video.*
+---
+
+### 📽️ Experience the Gemini Multimodal Demo
+[![Watch the Gemini Demo](https://img.youtube.com/vi/xf2LqZiGfic/0.jpg)](https://www.youtube.com/watch?v=xf2LqZiGfic)
+*ComplyAct uses Gemini 1.5 Pro to navigate legacy interfaces with real-time multimodal reasoning.*
 
 ---
 
 ## 🏔️ The Core Vision
-Enterprise automation is currently stuck in a dangerous rift. Traditional RPA is too rigid, while modern AI agents are often "black boxes" that hallucinate at scale. **ComplyAct** is the auditable bridge. We've built a translation layer that safely connects unstructured real-world data to rigid legacy ERP systems, governed by a deterministic **Graceful Halt** engine.
+Enterprise automation is currently stuck in a dangerous rift. Traditional RPA is too rigid, while modern AI agents are often "black boxes" that hallucinate at scale. **ComplyAct** is the auditable bridge. 
+
+Submitting to the **Gemini Live Agent Challenge (UI Navigator Track)**, ComplyAct demonstrates how **Gemini 1.5 Pro** can interpret unstructured real-world documents and safely navigate legacy ERP systems, governed by a deterministic **Graceful Halt** engine and backed by an immutable record on **Google Cloud Firestore**.
 
 ## 🗺️ System Architecture & Workflow Map
-![System Map](./DOCS/unnamed%20(21)%20(1).png)
+![Gemini Workflow](./DOCS/unnamed%20(21)%20(1).png)
 
-### 🌟 Key Innovations
+### 🌟 Key Innovations for the Gemini Challenge
 
-- **Multimodal Document Intelligence**: Powered by **Amazon Nova Pro**, ComplyAct extracts structured data from complex handwritten invoices and legal documents with precise confidence scoring.
-- **Ghost Cursor (Nova Act Simulation)**: A visual SVG agent that dynamically navigates legacy ERP systems, simulating the **Amazon Nova Act** reasoning model using coordinate-based intent.
-- **Hyper-Sync Engine**: A zero-latency synchronization layer that couples agent reasoning with UI actions at 2x speed for a responsive, human-in-the-loop experience.
-- **Auditable Ledger (QLDB)**: Every software action is transformed into a permanent legal record, generating a SHA-256 cryptographic receipt verified by **Amazon QLDB**.
+- **Gemini Multimodal Intelligence**: Powered by **Gemini 1.5 Pro**, ComplyAct extracts structured data from complex handwritten invoices and legal documents with precise confidence scoring and visual reasoning.
+- **Gemini UI Navigator (Ghost Cursor)**: A visual agent that dynamically navigates legacy ERP systems, interpreting visual input and coordinate-based intent through the lens of Gemini's reasoning.
+- **Hyper-Sync Engine**: A real-time synchronization layer that couples Gemini's high-speed reasoning with UI actions, providing a zero-latency interactive experience.
+- **Auditable Ledger (Firestore)**: Every software action is transformed into an immutable record. Process traces and cryptographic receipts are persisted to **Google Cloud Firestore**, fulfilling mandatory cloud audit requirements.
 
 ---
 
 ## 🚥 The Governance-First Workflow
 ![Process Flow](./DOCS/unnamed%20(18)%20(1).png)
 
-1. **Smart Ingest**: Complex documents are ingested via Nova Pro.
-2. **AI Automation**: The Ghost Cursor begins navigating the legacy ERP.
-3. **Human Oversight**: The engine halts automatically if confidence drops below 80%.
-4. **Final Receipt**: A tamper-proof cryptographic receipt is generated for the audit trail.
+1. **Gemini Ingest**: Complex documents (handwritten or digital) are analyzed by Gemini 1.5 Pro.
+2. **AI Navigation**: The Gemini UI Navigator begins executing the process on the legacy system.
+3. **Graceful Halt (HITL)**: If Gemini's confidence drops below 80% (e.g., due to extreme ambiguity), the engine halts and requests human intervention via a real-time modal.
+4. **Cloud Receipt**: Once complete, a SHA-256 cryptographic receipt is generated and stored in Firestore for a permanent audit trail.
 
 ---
 
-## 🏗️ Technical Deep Dive
+## 🏗️ Technical Architecture
 
 ### Interaction Sequence
 ```mermaid
@@ -47,45 +51,54 @@ sequenceDiagram
     participant User
     participant Frontend
     participant Backend
-    participant AWS_Nova
-    participant QLDB
+    participant Gemini_1.5_Pro
+    participant Firestore_GCP
 
-    User->>Frontend: Upload Invoice
+    User->>Frontend: Upload Document
     Frontend->>Backend: Start Audit (WebSocket)
-    Backend->>AWS_Nova: Multimodal Extraction
-    AWS_Nova-->>Backend: Data + Confidence
-    loop Automation
+    Backend->>Gemini_1.5_Pro: Multimodal Extraction
+    Gemini_1.5_Pro-->>Backend: Data + Confidence
+    loop Real-time Navigation
         Backend->>Frontend: Move Ghost Cursor
-        Backend->>Frontend: Reasoning Log
+        Backend->>Frontend: Gemini Reasoning Log
         alt Confidence < 80%
             Backend->>Frontend: Graceful Halt Trigger
-            Frontend->>User: Slack Approval Modal
-            User->>Frontend: Human Decision
-            Frontend->>Backend: Resume with Corrected Value
+            Frontend->>User: Human Decision (HITL)
+            User->>Frontend: Approve/Correct
+            Frontend->>Backend: Resume Execution
         end
     end
-    Backend->>QLDB: Generate Cryptographic Hash
-    QLDB-->>Frontend: Audit Receipt
+    Backend->>Firestore_GCP: Record Immutable Receipt
+    Firestore_GCP-->>Frontend: Audit Hash Verified
 ```
 
 ---
 
-## 🚀 One-Click Launch
-We have designed ComplyAct for instantaneous local execution. Ensure you have **Node.js 20+** and **Python 3.11+** installed.
+## 🚀 Deployment & Setup
+Designed for the Gemini Challenge, ComplyAct supports rapid deployment.
 
-### Run the Orchestrator
+### 1. Prerequisites
+- **Node.js 20+**
+- **Python 3.11+**
+- **Google Cloud Project** with Firestore enabled.
+
+### 2. Environment Configuration
+Create a `.env` in the `backend/` directory:
+```env
+GOOGLE_API_KEY=your_key
+GOOGLE_CLOUD_PROJECT=your_project_id
+AI_PROVIDER=GEMINI
+```
+
+### 3. Launch
 ```powershell
 .\run_demo.bat
 ```
-*This script automatically manages port conflicts for both the FastAPI backend and Next.js frontend.*
-
-Visit [**http://localhost:3000**](http://localhost:3000) to begin the audit.
+Visit [**http://localhost:3000**](http://localhost:3000) to see Gemini in action.
 
 ---
 
-## ❤️ Vision & Acknowledgments
-ComplyAct was built with a deep respect for the challenges of highly regulated industries. By prioritizing governance over blind speed, we believe we can unlock the true potential of Agentic Process Automation.
+## ❤️ Vision
+ComplyAct was built to prove that Agentic AI doesn't have to be "scary" for the enterprise. By utilizing Gemini's multimodal power within a strict governance framework, we can build agents that are as accountable as they are capable.
 
-Special thanks to the **AWS Bedrock** team for the Amazon Nova stack, providing the high-speed reasoning and interaction models that power this platform.
-
-**"Auditable. Accountable. Agentic Agentic."**
+**"Auditable. Accountable. Gemini-Native."**

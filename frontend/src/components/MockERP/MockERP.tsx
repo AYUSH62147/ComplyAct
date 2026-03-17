@@ -203,7 +203,7 @@ export default function MockERP({ commandQueue }: MockERPProps) {
                             </svg>
                             {/* Label */}
                             <div className="absolute left-6 top-0 px-1.5 py-0.5 bg-blue-600 text-[8px] text-white font-bold rounded shadow-sm whitespace-nowrap animate-in fade-in zoom-in duration-300">
-                                NOVA ACT AGENT
+                                GEMINI NAVIGATOR
                             </div>
                         </div>
                     </div>
